@@ -91,4 +91,14 @@ app.get('/facultad/:id/materias', async (req, res) => {
   res.json(employees);
 });
 
+//ESTUDIANTE
+app.get('/Estudiante', async (req, res) => {
+  const materias = await prisma.estudiante.findMany({
+    include:{
+      materias: true
+      
 
+    }
+  });
+  res.json(materias);
+})
