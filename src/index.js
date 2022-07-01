@@ -58,7 +58,15 @@ app.post('/Profesor', async (req, res) => {
   res.json(result);
 })
 
+//POST Matricula
+app.post('/Matricula', async (req, res) => {
+  const result = await prisma.matricula.create({
+    // req.body es la info que manda el usuario para crear
+    data: req.body
 
+  });
+  res.json(result);
+})
 
 //POST MATERIA
 app.post('/Materia', async (req, res) => {
