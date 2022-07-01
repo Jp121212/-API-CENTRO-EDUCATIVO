@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client';
 
 const app = express()
 const prisma = new PrismaClient()
-
 app.use(express.json())
 
 app.get('/', (req, res) => {
@@ -14,7 +13,7 @@ app.listen(8002, () => {
   console.log(`:S Example app listening on port 8002`)
 })
 
-//POST 
+ 
 app.post('/facultad', async (req, res) => {
   const result = await prisma.facultad.create({
     // req.body es la info que manda el usuario para crear
