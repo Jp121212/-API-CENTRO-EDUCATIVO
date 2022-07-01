@@ -10,7 +10,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
+model matricula{
+  id Int @id @default(autoincrement())
+  materia    materia@relation(fields: [materia_id],references: [id])
+  materia_id Int
+  estudiante estudiante@relation(fields: [estudiante_id],references: [id])
+  estudiante_id Int 
+}
 model estudiante{
   id Int @id @default(autoincrement())
   primer_nombre                 String
@@ -22,8 +28,7 @@ model estudiante{
   Facultad                      facultad @relation(fields: [facultad_id],references: [id])
   facultad_id                   Int                 
   deuda_ciclo_actual            Int
-  materia_cursando              materia @relation(fields: [materia_id],references: [id])   
-  materia_id                    Int
+  materias                      matricula[]
 }
 
 model materia{
@@ -34,7 +39,7 @@ model materia{
   carrera             String
   facultad            facultad @relation(fields: [facultad_id],references: [id])
   facultad_id         Int
-  estudiantes         estudiante[]
+  estudiantes         matricula[]
   profesor            profesor@relation(fields: [profesor_id],references: [id])
   profesor_id         Int
  
