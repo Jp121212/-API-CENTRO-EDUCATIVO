@@ -30,21 +30,22 @@ model materia{
   id Int @id @default(autoincrement())
   nombre              String
   codigo              String
-  profesor            profesor[]
   creditos            Int
   carrera             String
   facultad            facultad @relation(fields: [facultad_id],references: [id])
   facultad_id         Int
   estudiantes         estudiante[]
+  profesor            profesor@relation(fields: [profesor_id],references: [id])
+  profesor_id         Int
  
 } 
 
 
 model facultad{
   id Int @id @default(autoincrement())
-  nombre String
+  nombre        String
   nombre_decano String
-  Abreviacion String
+  Abreviacion   String
   materias materia[]
   estudiants estudiante[]
   profesores profesor[]
@@ -52,10 +53,9 @@ model facultad{
 
 model profesor{
   id Int @id @default(autoincrement())
-  nombre String
+  nombre   String
   apellido String
-  materias materia@relation(fields: [materia_id],references: [id])
-  materia_id Int
+  materias materia[]
   Facultad facultad @relation(fields: [facultad_id],references: [id])
   facultad_id Int
 }
