@@ -58,7 +58,9 @@ router.get('/Materias/:id', async (req, res) => {
     const { id } = req.params;
     try{
       const getMat = await prisma.materia.findUnique({
-        where: { id: Number(id)},
+        where: { id: Number(id)},include:{
+            estudiantes:true
+        }
       });
       if(getMat){
         res.json(getMat);
