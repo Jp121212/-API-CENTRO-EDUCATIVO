@@ -85,5 +85,58 @@ router.get('/facultad/:id/materias', async (req, res) => {
     res.json(employees);
   });
 
+//GET ESTUDIANTES ID DE UNA FACULTAD
+  router.get('/facultad/:id/estudiantes', async (req, res) => {
+    const { id } = req.params;
+    // const id = req.params.id
   
+    const employees = await prisma.estudiante.findMany({
+      where: {
+        facultad_id: Number(id)
+      }
+    });
+  
+    res.json(employees);
+  });
+  
+
+//GET PROFESORES ID DE UNA FACULTAD
+router.get('/facultad/:id/profesores', async (req, res) => {
+    const { id } = req.params;
+    // const id = req.params.id
+  
+    const employees = await prisma.profesor.findMany({
+      where: {
+        facultad_id: Number(id)
+      }
+    });
+  
+    res.json(employees);
+  });
+  
+//GET BY ID
+router.get('/Facultad/:id', async (req, res) => {
+    const { id } = req.params;
+    try{
+      const getFac = await prisma.facultad.findUnique({
+        where: { id: Number(id)},
+        include: {  materias: true,
+                    estudiants: true,
+                    profesores: true
+      }
+      });
+      if(getFac){
+        res.json(getFac);
+      }else{
+        res.json({error: `Facultad con el id ${id} no existe`})
+      }
+    }catch(e){
+      res.json({error: `No se pueden ingresar letras : ${id} `})
+    }})
+
+
+
+
+
+
 export default router;
