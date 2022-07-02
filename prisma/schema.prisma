@@ -29,6 +29,7 @@ model estudiante{
   facultad_id                   Int                 
   deuda_ciclo_actual            Int
   materias                      matricula[]
+  
 }
 
 model materia{
