@@ -4,7 +4,8 @@ import { PrismaClient } from "@prisma/client";
 const router = Router();
 const prisma = new PrismaClient();
 
-//POST MATERIA
+//CRUD PROFESOR
+//POST PROFESOR
 router.post('/Profesor', async (req, res) => {
     const result = await prisma.profesor.create({
       // req.body es la info que manda el usuario para crear
@@ -20,7 +21,7 @@ router.get('/Profesor', async (req, res) => {
     });
     res.json(materias);
   })  
-export default router;
+
 
 
 //DELETE PROFESOR
@@ -55,3 +56,72 @@ router.put('/Profesor/:id', async (req, res) => {
       res.json({error: `Profesor con el id ${id} no existe`})
     }
   })
+
+//GET BY ID
+router.get('/Profesor/:id', async (req, res) => {
+    const { id } = req.params;
+    try{
+      const getMat = await prisma.profesor.findUnique({
+        where: { id: Number(id)},include:{materias:true
+
+        }
+      });
+      if(getMat){
+        res.json(getMat);
+      }else{
+        res.json({error: `Profesor con el id ${id} no existe`})
+      }
+    }catch(e){
+      res.json({error: `No se pueden ingresar letras: ${id} `})
+    }})
+
+//GET PROFESOR MATERIAs
+ router.get('/Profesor/:id/materia', async (req, res) => {
+    const { id } = req.params;
+    // const id = req.params.id
+  
+    const employees = await prisma.profesor.findMany({
+        where: { id: Number(id)},
+        include: {  materias: true,
+        _count:{select:{ materias:true}
+                    
+      }}
+      
+    });
+
+    res.json(employees);
+   
+  });
+
+//GET PROFESOR ESTUDIANTES
+router.get('/Profesor/:id/estudiantes', async (req, res) => {
+    const { id } = req.params;
+    // const id = req.params.id
+  
+    const employees = await prisma.facultad.findMany({
+        where: { id: Number(id)},
+        include: {  estudiants: true,
+        _count:{select:{ estudiants:true}
+                    
+      }}
+      
+    });
+
+    res.json(employees);
+   
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export default router;
