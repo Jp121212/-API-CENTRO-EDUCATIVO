@@ -17,4 +17,7 @@ router.post('/Matricula', async (req, res) => {
 router.get('/Matriculas', async (req, res) => {
     const materias = await prisma.matricula.findMany();
     res.json(materias);
-  })
+  });
+
+  export default router;
+
