@@ -62,15 +62,6 @@ router.put('/Facultad/:id', async (req, res) => {
     }
   })
 
-
-
-
-
-
-
-
-
-
 //GET MATERIAS DE UNA FACULTAD
 router.get('/facultad/:id/materias', async (req, res) => {
     const { id } = req.params;
@@ -133,10 +124,6 @@ router.get('/Facultad/:id', async (req, res) => {
     }catch(e){
       res.json({error: `No se pueden ingresar letras : ${id} `})
     }})
-
-
-
-
 
 
 export default router;
