@@ -81,11 +81,17 @@ router.get('/facultad/:id/materias', async (req, res) => {
     const { id } = req.params;
     // const id = req.params.id
   
-    const employees = await prisma.estudiante.findMany({
+    const employees = await prisma.facultad.findMany({
       where: {
-        facultad_id: Number(id)
+        id: Number(id)},
+        include: { estudiants:true,
+            _count:{select:{ estudiants:true}
+                        
+          }}
+        
+        
       }
-    });
+    );
   
     res.json(employees);
   });
@@ -96,10 +102,14 @@ router.get('/facultad/:id/profesores', async (req, res) => {
     const { id } = req.params;
     // const id = req.params.id
   
-    const employees = await prisma.profesor.findMany({
-      where: {
-        facultad_id: Number(id)
-      }
+    const employees = await prisma.facultad.findMany({
+        where: {
+            id: Number(id)},
+            include: { profesores:true,
+                _count:{select:{ profesores:true}
+                            
+              }}
+              
     });
   
     res.json(employees);
