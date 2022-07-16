@@ -12,6 +12,7 @@ const app = express()
 const prisma = new PrismaClient()
 app.use(express.json())
 app.use(morgan("dev"));
+app.set('port', (process.env.PORT || 5000));
 
 app.use(express.json());
 app.use(estudianteRoutes);
@@ -20,14 +21,13 @@ app.use(profesoreRoutes);
 app.use(facultadRoutes);
 app.use(matriculasRoutes);
 
-app.get('/', (req, res) => {
-  res.send('- Si sirve la API 👩 -')
-})
-
-app.listen(5000, () => {
-  console.log(`:S Example app listening on port 8002`)
-})
-
+//For avoidong Heroku $PORT error
+app.get('/', function(req, response) {
+  var result = 'App is running'
+  response.send(result);
+}).listen(app.get('port'), function() {
+  console.log('App is running, server is listening on port ', app.get('port'));
+});
  
 
 
