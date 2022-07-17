@@ -12,7 +12,7 @@ import cors from "cors";
 
 const app = express()
 const prisma = new PrismaClient()
-const cors = cors;
+const cors1 = cors;
 
 app.use(express.json())
 app.use(morgan("dev"));
@@ -29,7 +29,7 @@ app.use(materiaRoutes);
 app.use(profesoreRoutes);
 app.use(facultadRoutes);
 app.use(matriculasRoutes);
-app.use(cors(corrOptions));
+app.use(cors1(corrOptions));
 
 //For avoidong Heroku $PORT error
 app.get('/', function(req, response) {
