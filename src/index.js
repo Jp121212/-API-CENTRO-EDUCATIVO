@@ -12,7 +12,7 @@ const app = express()
 const prisma = new PrismaClient()
 const cors = require('cors');
 app.use(cors({
-    origin: '*',
+    origin: 'https://jp-bd.herokuapp.com',
 }));
 app.use(express.json())
 app.use(morgan("dev"));
