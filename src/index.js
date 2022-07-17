@@ -7,6 +7,7 @@ import profesoreRoutes from "./routes/profesor.routes.js";
 import facultadRoutes from "./routes/facultad.routes.js";
 import matriculasRoutes from "./routes/matricula.routes.js";
 import morgan from "morgan";
+import cors from "cors";
 
 const app = express()
 const prisma = new PrismaClient()
