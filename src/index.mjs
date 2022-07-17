@@ -9,9 +9,10 @@ import matriculasRoutes from "./routes/matricula.routes.js";
 import morgan from "morgan";
 
 
+
 const app = express()
 const prisma = new PrismaClient()
-const cors = require('cors');
+const cors = req('cors');
 
 app.use(express.json())
 app.use(morgan("dev"));
