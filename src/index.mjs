@@ -19,14 +19,14 @@ app.use(morgan("dev"));
 app.set('port', (process.env.PORT || 5000));
 
 
-
+app.use(cors());
 app.use(express.json());
 app.use(estudianteRoutes);
 app.use(materiaRoutes);
 app.use(profesoreRoutes);
 app.use(facultadRoutes);
 app.use(matriculasRoutes);
-app.use(cors());
+
 
 //For avoidong Heroku $PORT error
 app.get('/', function(req, response) {
