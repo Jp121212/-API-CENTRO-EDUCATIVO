@@ -7,21 +7,17 @@ import profesoreRoutes from "./routes/profesor.routes.js";
 import facultadRoutes from "./routes/facultad.routes.js";
 import matriculasRoutes from "./routes/matricula.routes.js";
 import morgan from "morgan";
-import cors from "cors";
 
 
+const cors = require('cors');
 const app = express()
 const prisma = new PrismaClient()
-const cors1 = cors;
+
 
 app.use(express.json())
 app.use(morgan("dev"));
 app.set('port', (process.env.PORT || 5000));
-const corrOptions = {
-    origin: ['https://jp-bd.herokuapp.com','https://www.google.com/','https://react-jp12.herokuapp.com'], 
-    methods: 'GET,HEAD',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+
 
 
 app.use(express.json());
@@ -30,7 +26,7 @@ app.use(materiaRoutes);
 app.use(profesoreRoutes);
 app.use(facultadRoutes);
 app.use(matriculasRoutes);
-app.use(cors1(corrOptions));
+app.use(cors());
 
 //For avoidong Heroku $PORT error
 app.get('/', function(req, response) {
