@@ -19,6 +19,7 @@ app.use(morgan("dev"));
 app.set('port', (process.env.PORT || 5000));
 const corrOptions = {
     origin: ['https://jp-bd.herokuapp.com','https://www.google.com/','https://react-jp12.herokuapp.com'], 
+    methods: 'GET,HEAD',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
